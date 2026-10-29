@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>小型飞机部件与三轴运动｜Aircraft Anatomy & Three Axes</title>
+  <style>
+    :root{
+      --theme:#f25f29; --theme-2:#ff8a3d; --ink:#1d1d1f; --muted:#6e6e73;
+      --paper:#f4f5f7; --panel:#fff; --line:#e6e3db; --cream:#fffcf7;
+      --aero:#f25f29; --control:#ff9c38; --power:#e64732;
+      --structure:#9a6547; --gear:#15966d; --shadow:0 16px 45px rgba(61,43,32,.09);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif;line-height:1.65}
+    a{color:inherit}
+    .shell{width:min(1480px,calc(100% - 32px));margin:auto}
+    header{padding:54px 48px 48px;margin-top:24px;border-radius:24px;background:linear-gradient(125deg,var(--theme),var(--theme-2));color:#fff;position:relative;overflow:hidden;isolation:isolate;box-shadow:0 18px 50px rgba(242,95,41,.18)}
+    header::after{content:"";position:absolute;z-index:-1;width:360px;height:360px;right:-80px;top:-235px;border:62px solid rgba(255,255,255,.13);border-radius:50%}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--theme);font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:34px;height:2px;background:var(--theme)}
+    header .eyebrow{color:#fff} header .eyebrow::before{background:#fff}
+    h1{max-width:960px;margin:14px 0 18px;font-size:clamp(2.2rem,5vw,5rem);line-height:1.02;letter-spacing:-.045em}
+    h1 span{display:block;color:rgba(255,255,255,.82);-webkit-text-stroke:0;font-weight:650}
+    .lead{max-width:840px;color:rgba(255,255,255,.9);font-size:clamp(1rem,1.5vw,1.18rem)}
+    .summary{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}
+    .summary span{padding:7px 11px;border:1px solid rgba(255,255,255,.32);border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:.83rem}
+    .section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:52px 0 20px}
+    .section-head h2{margin:0;font-size:clamp(1.55rem,3vw,2.6rem);letter-spacing:-.03em}
+    .section-head p{margin:0;color:var(--muted);max-width:520px;font-size:.95rem}
+    .viewer{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+    .toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:13px 15px;background:#fff;border-bottom:1px solid var(--line)}
+    .toolbar strong{font-size:.83rem;color:var(--muted);margin-right:4px}
+    button.filter{appearance:none;border:1px solid var(--line);background:var(--cream);color:#5d524c;border-radius:10px;padding:8px 12px;font:inherit;font-size:.82rem;cursor:pointer;transition:.2s}
+    button.filter:hover,button.filter:focus-visible{border-color:var(--theme);color:var(--theme);outline:none;transform:translateY(-1px)}
+    button.filter.active{background:var(--theme);color:#fff;border-color:var(--theme);font-weight:800;box-shadow:0 5px 15px rgba(242,95,41,.22)}
+    .photo-stage{position:relative;isolation:isolate;aspect-ratio:4/3;background:#000}
+    .photo-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+    .photo-stage svg{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+    .callout{transition:opacity .24s ease,filter .24s ease}
+    .callout.is-muted{opacity:.12;filter:grayscale(1)}
+    .callout path{fill:none;stroke:var(--c);stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px #000)}
+    .callout .target{fill:var(--c);stroke:#07111d;stroke-width:4}
+    .callout rect{fill:rgba(4,13,22,.89);stroke:var(--c);stroke-width:1.4;rx:10;filter:drop-shadow(0 7px 13px rgba(0,0,0,.35))}
+    .callout text{fill:white;font-size:17px;font-weight:800;paint-order:stroke;stroke:#07111d;stroke-width:2px;stroke-linejoin:round}
+    .callout text.small{font-size:13px;font-weight:600;fill:var(--c)}
+    .cat-aero{--c:var(--aero)} .cat-control{--c:var(--control)} .cat-power{--c:var(--power)}
+    .cat-structure{--c:var(--structure)} .cat-gear{--c:var(--gear)}
+    .viewer-note{display:flex;justify-content:space-between;gap:20px;padding:13px 17px;background:var(--cream);color:var(--muted);font-size:.78rem}
+    .legend{display:flex;flex-wrap:wrap;gap:11px}
+    .legend span{display:flex;align-items:center;gap:5px}.dot{width:8px;height:8px;border-radius:50%}
+    .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .part{min-height:185px;padding:21px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.045);position:relative;overflow:hidden}
+    .part::after{content:"";position:absolute;right:-26px;top:-26px;width:82px;height:82px;border-radius:50%;background:var(--c);opacity:.09}
+    .part .num{font:800 .75rem/1 ui-monospace,monospace;color:var(--c);letter-spacing:.12em}
+    .part h3{margin:13px 0 9px;font-size:1.17rem;line-height:1.25}.part h3 span{display:block;color:var(--muted);font-size:.82rem;font-weight:600;margin-top:5px}
+    .part p{margin:0;color:#514b47;font-size:.89rem}.part p em{display:block;color:var(--muted);font-size:.78rem;font-style:normal;margin-top:7px;line-height:1.45}
+    .axes-wrap{margin:64px 0 40px;padding:clamp(24px,5vw,58px);border:1px solid #f2ded2;border-radius:24px;background:linear-gradient(145deg,#fff,var(--cream));box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .axes-wrap::after{content:"";position:absolute;width:240px;height:240px;border:44px solid rgba(242,95,41,.07);border-radius:50%;right:-110px;top:-150px;pointer-events:none}
+    .axes-intro{display:flex;gap:28px;justify-content:space-between;align-items:end;margin-bottom:26px}.axes-intro h2{font-size:clamp(1.7rem,3vw,3rem);line-height:1.1;margin:0}.axes-intro p{margin:0;max-width:600px;color:var(--muted)}
+    .axes{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .axis{border:1px solid var(--line);background:#fff;border-radius:16px;padding:19px;min-width:0;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+    .axis svg{width:100%;height:150px;display:block;background:radial-gradient(circle at 50% 50%,rgba(242,95,41,.07),transparent 62%);border-radius:12px}
+    .axis h3{margin:13px 0 3px;font-size:1.35rem}.axis .motion{font-weight:800;color:var(--c)}
+    .axis p{color:#514b47;font-size:.88rem;margin:10px 0 0}.axis p span{display:block;color:var(--muted);font-size:.79rem;margin-top:6px}
+    .memory{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+    .memory div{padding:13px;text-align:center;background:#fff}.memory div+div{border-left:1px solid var(--line)}.memory strong{color:var(--c);display:block}.memory span{font-size:.78rem;color:var(--muted)}
+    .config-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 0}
+    .config-card{padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+    .config-card .tag{display:inline-block;padding:4px 9px;border-radius:999px;background:var(--cream);color:var(--theme);font-size:.74rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .config-card h3{margin:12px 0 10px;font-size:1.25rem}.config-card p{margin:0;color:var(--muted);font-size:.9rem}
+    .config-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}.config-list span{padding:6px 9px;border-radius:8px;background:#f7f3ef;color:#594e47;font-size:.78rem;font-weight:700}
+    footer{padding:22px 0 58px;color:#718397;font-size:.78rem;text-align:center}
+    @media(max-width:980px){.parts{grid-template-columns:repeat(2,1fr)}.axes{grid-template-columns:1fr}.axis{display:grid;grid-template-columns:180px 1fr;column-gap:20px}.axis svg{grid-row:1/4;height:150px}.axis h3{margin-top:10px}.axes-intro{align-items:start;flex-direction:column}.callout text{font-size:18px}}
+    @media(max-width:620px){.shell{width:min(100% - 20px,1480px)}header{padding:36px 22px 32px;margin-top:10px}.section-head{align-items:start;flex-direction:column}.toolbar strong{width:100%}.photo-stage{overflow:auto;aspect-ratio:auto}.photo-stage img,.photo-stage svg{width:940px;height:705px;position:absolute;max-width:none}.photo-stage{height:705px}.parts,.config-grid{grid-template-columns:1fr}.axes-wrap{padding:22px 14px}.axis{display:block}.memory{grid-template-columns:1fr}.memory div+div{border-left:0;border-top:1px solid var(--line)}.viewer-note{flex-direction:column}.photo-stage::after{content:"← 左右滑动查看完整标注 →";position:sticky;left:14px;top:14px;z-index:5;display:inline-block;margin:12px;padding:5px 9px;border-radius:999px;background:rgba(242,95,41,.92);color:white;font-size:11px}}
+    @media print{body{background:white;color:#111}.shell{width:100%}header{padding:15px 0}.toolbar{display:none}.viewer,.part,.axes-wrap,.axis{box-shadow:none;break-inside:avoid}.photo-stage{aspect-ratio:4/3}.parts{grid-template-columns:repeat(3,1fr)}.part,.axes-wrap,.axis{background:white;color:#111}.part p,.axis p,.lead,.section-head p,.axes-intro p{color:#333}footer{display:none}}
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <div class="eyebrow">Visual Study Sheet · 图解学习页</div>
+    <h1>两型小型飞机部件图解 <span>Aircraft Anatomy</span></h1>
+    <p class="lead">通过两张实拍照片对比高翼单发与低翼双发飞机：在不同视角中定位关键部件，再用“点头、摇头、歪头”记住 Pitch、Yaw、Roll。</p>
+    <div class="summary"><span>2 架实拍 / 2 Aircraft</span><span>中英双语 / Bilingual</span><span>三轴运动 / Three Axes</span><span>可筛选标注 / Filterable Labels</span></div>
+  </header>
+
+  <main class="shell">
+    <section aria-labelledby="photo-title">
+      <div class="section-head"><div><div class="eyebrow">01 · Aircraft A</div><h2 id="photo-title">高翼单发飞机 · High-wing Single</h2></div><p>侧前方视角适合观察机翼支撑杆、单发动机、尾翼和固定起落架。点击类别只看相关标注。</p></div>
+      <div class="viewer">
+        <div class="toolbar" role="toolbar" aria-label="标注筛选器">
+          <strong>显示 / Show</strong>
+          <button class="filter active" data-filter="all">全部 All</button>
+          <button class="filter" data-filter="aero">气动 Aero</button>
+          <button class="filter" data-filter="control">操纵面 Controls</button>
+          <button class="filter" data-filter="power">动力 Power</button>
+          <button class="filter" data-filter="structure">结构 Structure</button>
+          <button class="filter" data-filter="gear">起落架 Gear</button>
+        </div>
+        <div class="photo-stage">
+          <img src="aircraft-photo.jpeg" alt="停机坪上的一架高翼单发小型飞机，机头朝右">
+          <svg viewBox="0 0 1536 1152" role="img" aria-label="飞机部件箭头标注层">
+            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+
+            <g class="callout cat-aero" data-cat="aero"><path d="M1318 525 L1225 590 L1120 641" marker-end="url(#arrow)"/><circle class="target" cx="1120" cy="641" r="7"/><rect x="1290" y="468" width="218" height="62"/><text x="1306" y="492">机翼</text><text class="small" x="1306" y="515">Wing · 产生升力</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M1332 755 L1254 710 L1135 673" marker-end="url(#arrow)"/><circle class="target" cx="1135" cy="673" r="7"/><rect x="1300" y="746" width="208" height="62"/><text x="1316" y="770">副翼</text><text class="small" x="1316" y="793">Aileron · 横滚控制</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M1135 827 L1055 748 L929 682" marker-end="url(#arrow)"/><circle class="target" cx="929" cy="682" r="7"/><rect x="1095" y="818" width="198" height="62"/><text x="1111" y="842">襟翼</text><text class="small" x="1111" y="865">Flap · 增升与增阻</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M350 950 L445 875 L575 755" marker-end="url(#arrow)"/><circle class="target" cx="575" cy="755" r="7"/><rect x="135" y="930" width="255" height="64"/><text x="151" y="954">机翼支撑杆</text><text class="small" x="151" y="978">Wing / Lift Strut</text></g>
+            <g class="callout cat-power" data-cat="power"><path d="M980 875 L887 818 L777 750" marker-end="url(#arrow)"/><circle class="target" cx="777" cy="750" r="7"/><rect x="940" y="866" width="215" height="62"/><text x="956" y="890">发动机</text><text class="small" x="956" y="913">Engine · 产生功率</text></g>
+            <g class="callout cat-power" data-cat="power"><path d="M1040 527 L944 588 L850 691" marker-end="url(#arrow)"/><circle class="target" cx="850" cy="691" r="7"/><rect x="1010" y="469" width="222" height="62"/><text x="1026" y="493">螺旋桨</text><text class="small" x="1026" y="516">Propeller · 产生推力</text></g>
+            <g class="callout cat-gear" data-cat="gear"><path d="M895 1010 L830 951 L774 883" marker-end="url(#arrow)"/><circle class="target" cx="774" cy="883" r="7"/><rect x="850" y="1000" width="236" height="62"/><text x="866" y="1024">前起落架</text><text class="small" x="866" y="1047">Nose Gear · 支撑/转向</text></g>
+            <g class="callout cat-gear" data-cat="gear"><path d="M560 1050 L520 966 L476 878" marker-end="url(#arrow)"/><circle class="target" cx="476" cy="878" r="7"/><rect x="525" y="1037" width="255" height="62"/><text x="541" y="1061">主起落架</text><text class="small" x="541" y="1084">Main Landing Gear</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M115 522 L196 555 L272 610" marker-end="url(#arrow)"/><circle class="target" cx="272" cy="610" r="7"/><rect x="24" y="458" width="275" height="64"/><text x="40" y="482">垂直安定面</text><text class="small" x="40" y="506">Vertical Stabilizer</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M120 667 L174 662 L235 650" marker-end="url(#arrow)"/><circle class="target" cx="235" cy="650" r="7"/><rect x="22" y="635" width="198" height="62"/><text x="38" y="659">方向舵</text><text class="small" x="38" y="682">Rudder · 偏航控制</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M110 808 L160 780 L218 753" marker-end="url(#arrow)"/><circle class="target" cx="218" cy="753" r="7"/><rect x="20" y="799" width="286" height="64"/><text x="36" y="823">水平安定面</text><text class="small" x="36" y="847">Horizontal Stabilizer</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M120 1015 L130 889 L150 777" marker-end="url(#arrow)"/><circle class="target" cx="150" cy="777" r="7"/><rect x="22" y="1004" width="230" height="62"/><text x="38" y="1028">升降舵</text><text class="small" x="38" y="1051">Elevator · 俯仰控制</text></g>
+          </svg>
+        </div>
+        <div class="viewer-note"><span>注：发动机位于机头整流罩内部；标注指向其安装区域。</span><div class="legend"><span><i class="dot" style="background:var(--aero)"></i>气动</span><span><i class="dot" style="background:var(--control)"></i>操纵面</span><span><i class="dot" style="background:var(--power)"></i>动力</span><span><i class="dot" style="background:var(--structure)"></i>结构</span><span><i class="dot" style="background:var(--gear)"></i>起落架</span></div></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="photo2-title">
+      <div class="section-head"><div><div class="eyebrow">02 · Aircraft B</div><h2 id="photo2-title">低翼双发飞机 · Low-wing Twin</h2></div><p>正面略偏左的视角突出双发动机、双螺旋桨、低翼、前三点起落架和高置水平尾翼。</p></div>
+      <div class="viewer">
+        <div class="toolbar" role="toolbar" aria-label="第二架飞机标注筛选器">
+          <strong>显示 / Show</strong>
+          <button class="filter active" data-filter="all">全部 All</button>
+          <button class="filter" data-filter="aero">气动 Aero</button>
+          <button class="filter" data-filter="control">操纵面 Controls</button>
+          <button class="filter" data-filter="power">动力 Power</button>
+          <button class="filter" data-filter="structure">结构 Structure</button>
+          <button class="filter" data-filter="gear">起落架 Gear</button>
+        </div>
+        <div class="photo-stage">
+          <img src="aircraft-photo-2.jpeg" alt="跑道上的一架低翼双发小型飞机，面向镜头">
+          <svg viewBox="0 0 1536 1152" role="img" aria-label="第二架飞机部件箭头标注层">
+            <defs><marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+
+            <g class="callout cat-aero" data-cat="aero"><path d="M1260 588 L1100 655 L905 707" marker-end="url(#arrow2)"/><circle class="target" cx="905" cy="707" r="7"/><rect x="1230" y="530" width="276" height="62"/><text x="1246" y="554">低置机翼</text><text class="small" x="1246" y="577">Low Wing · 产生升力</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M1290 765 L1165 742 L1030 720" marker-end="url(#arrow2)"/><circle class="target" cx="1030" cy="720" r="7"/><rect x="1260" y="754" width="246" height="62"/><text x="1276" y="778">副翼</text><text class="small" x="1276" y="801">Aileron · 横滚控制</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M1110 885 L982 815 L830 755" marker-end="url(#arrow2)"/><circle class="target" cx="830" cy="755" r="7"/><rect x="1075" y="875" width="218" height="62"/><text x="1091" y="899">襟翼</text><text class="small" x="1091" y="922">Flap · 增升与增阻</text></g>
+            <g class="callout cat-power" data-cat="power"><path d="M278 895 L365 815 L478 727" marker-end="url(#arrow2)"/><path d="M278 895 L520 820 L803 720" marker-end="url(#arrow2)"/><circle class="target" cx="478" cy="727" r="7"/><circle class="target" cx="803" cy="720" r="7"/><rect x="42" y="865" width="272" height="64"/><text x="58" y="889">双发动机</text><text class="small" x="58" y="913">Twin Engines · 两侧动力</text></g>
+            <g class="callout cat-power" data-cat="power"><path d="M1170 477 L1015 564 L817 690" marker-end="url(#arrow2)"/><path d="M1170 477 L835 560 L494 695" marker-end="url(#arrow2)"/><circle class="target" cx="817" cy="690" r="7"/><circle class="target" cx="494" cy="695" r="7"/><rect x="1138" y="416" width="280" height="64"/><text x="1154" y="440">双螺旋桨</text><text class="small" x="1154" y="464">Propellers · 产生推力</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M245 699 L345 715 L465 741" marker-end="url(#arrow2)"/><circle class="target" cx="465" cy="741" r="7"/><rect x="35" y="666" width="250" height="64"/><text x="51" y="690">发动机舱</text><text class="small" x="51" y="714">Engine Nacelle</text></g>
+            <g class="callout cat-gear" data-cat="gear"><path d="M895 938 L790 877 L690 821" marker-end="url(#arrow2)"/><circle class="target" cx="690" cy="821" r="7"/><rect x="852" y="928" width="235" height="62"/><text x="868" y="952">前起落架</text><text class="small" x="868" y="975">Nose Gear · 支撑/转向</text></g>
+            <g class="callout cat-gear" data-cat="gear"><path d="M600 1030 L540 902 L477 789" marker-end="url(#arrow2)"/><path d="M600 1030 L675 910 L735 800" marker-end="url(#arrow2)"/><circle class="target" cx="477" cy="789" r="7"/><circle class="target" cx="735" cy="800" r="7"/><rect x="558" y="1018" width="262" height="62"/><text x="574" y="1042">主起落架</text><text class="small" x="574" y="1065">Main Landing Gear</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M245 475 L355 530 L472 605" marker-end="url(#arrow2)"/><circle class="target" cx="472" cy="605" r="7"/><rect x="35" y="424" width="274" height="64"/><text x="51" y="448">垂直安定面</text><text class="small" x="51" y="472">Vertical Stabilizer</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M270 570 L355 602 L454 645" marker-end="url(#arrow2)"/><circle class="target" cx="454" cy="645" r="7"/><rect x="48" y="538" width="215" height="62"/><text x="64" y="562">方向舵</text><text class="small" x="64" y="585">Rudder · 偏航控制</text></g>
+            <g class="callout cat-structure" data-cat="structure"><path d="M440 375 L421 468 L392 572" marker-end="url(#arrow2)"/><circle class="target" cx="392" cy="572" r="7"/><rect x="290" y="343" width="320" height="64"/><text x="306" y="367">T形水平安定面</text><text class="small" x="306" y="391">T-tail Horizontal Stabilizer</text></g>
+            <g class="callout cat-control" data-cat="control"><path d="M210 345 L280 455 L350 581" marker-end="url(#arrow2)"/><circle class="target" cx="350" cy="581" r="7"/><rect x="42" y="312" width="228" height="62"/><text x="58" y="336">升降舵</text><text class="small" x="58" y="359">Elevator · 俯仰控制</text></g>
+          </svg>
+        </div>
+        <div class="viewer-note"><span>注：这架飞机采用低翼、双发和 T 形尾翼；控制面边界受正面视角影响，箭头标示其大致所在区域。</span><div class="legend"><span><i class="dot" style="background:var(--aero)"></i>气动</span><span><i class="dot" style="background:var(--control)"></i>操纵面</span><span><i class="dot" style="background:var(--power)"></i>动力</span><span><i class="dot" style="background:var(--structure)"></i>结构</span><span><i class="dot" style="background:var(--gear)"></i>起落架</span></div></div>
+      </div>
+
+      <div class="config-grid" aria-label="两架飞机构型对照">
+        <article class="config-card"><span class="tag">Aircraft A</span><h3>高翼单发 · High-wing Single</h3><p>结构简单、视野和地面间隙良好，常见于初级训练与通用航空。</p><div class="config-list"><span>1 × Engine</span><span>High Wing</span><span>Wing Strut</span><span>Fixed Gear</span></div></article>
+        <article class="config-card"><span class="tag">Aircraft B</span><h3>低翼双发 · Low-wing Twin</h3><p>两侧发动机带来更复杂的动力管理，也适合学习多发与单发失效操作。</p><div class="config-list"><span>2 × Engines</span><span>Low Wing</span><span>T-tail</span><span>Retractable Gear</span></div></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="parts-title">
+      <div class="section-head"><div><div class="eyebrow">03 · Understand</div><h2 id="parts-title">部件名称与作用</h2></div><p>先记“它在哪里”，再记“它做什么”。这些核心部件在两种构型上的功能基本相同。</p></div>
+      <div class="parts">
+        <article class="part cat-aero"><div class="num">01 · LIFT</div><h3>机翼<span>Wing</span></h3><p>让空气流过翼型并产生升力，支撑飞机重量。<em>Creates lift as air flows around the airfoil, supporting the aircraft’s weight.</em></p></article>
+        <article class="part cat-control"><div class="num">02 · ROLL</div><h3>副翼<span>Aileron</span></h3><p>左右副翼反向偏转，使飞机绕纵轴横滚。<em>Move oppositely to roll the aircraft about its longitudinal axis.</em></p></article>
+        <article class="part cat-control"><div class="num">03 · LOW SPEED</div><h3>襟翼<span>Flap</span></h3><p>放下时增加升力和阻力，帮助低速起飞与着陆。<em>Increase lift and drag for lower-speed takeoff and landing.</em></p></article>
+        <article class="part cat-structure"><div class="num">04 · LOAD PATH</div><h3>机翼支撑杆<span>Wing / Lift Strut</span></h3><p>把机翼载荷传给机身，为高翼提供结构支撑。<em>Transfers wing loads to the fuselage and braces the high wing.</em></p></article>
+        <article class="part cat-power"><div class="num">05 · POWER</div><h3>发动机<span>Engine</span></h3><p>燃烧燃料产生机械功率，带动螺旋桨旋转。<em>Produces mechanical power that turns the propeller.</em></p></article>
+        <article class="part cat-power"><div class="num">06 · THRUST</div><h3>螺旋桨<span>Propeller</span></h3><p>像旋转的机翼，把发动机功率转换为向前推力。<em>Acts like a rotating wing, converting power into forward thrust.</em></p></article>
+        <article class="part cat-gear"><div class="num">07 · STEER</div><h3>前起落架<span>Nose Gear</span></h3><p>支撑机头，并在地面滑行时帮助转向。<em>Supports the nose and helps steer while taxiing.</em></p></article>
+        <article class="part cat-gear"><div class="num">08 · LAND</div><h3>主起落架<span>Main Landing Gear</span></h3><p>承受大部分飞机重量和着陆冲击。<em>Carries most of the aircraft’s weight and landing loads.</em></p></article>
+        <article class="part cat-structure"><div class="num">09 · STABILITY</div><h3>垂直安定面<span>Vertical Stabilizer</span></h3><p>提供方向稳定性，帮助机头保持顺着相对气流。<em>Provides directional stability and keeps the nose aligned with airflow.</em></p></article>
+        <article class="part cat-control"><div class="num">10 · YAW</div><h3>方向舵<span>Rudder</span></h3><p>左右偏转以控制偏航，并配合副翼协调转弯。<em>Controls yaw and works with the ailerons for coordinated turns.</em></p></article>
+        <article class="part cat-structure"><div class="num">11 · STABILITY</div><h3>水平安定面<span>Horizontal Stabilizer</span></h3><p>提供俯仰稳定性，帮助飞机保持平衡姿态。<em>Provides pitch stability and helps the aircraft maintain balance.</em></p></article>
+        <article class="part cat-control"><div class="num">12 · PITCH</div><h3>升降舵<span>Elevator</span></h3><p>上下偏转以控制机头抬高或压低。<em>Controls pitch by moving the nose up or down.</em></p></article>
+      </div>
+    </section>
+
+    <section class="axes-wrap" aria-labelledby="axes-title">
+      <div class="axes-intro"><div><div class="eyebrow">04 · Move</div><h2 id="axes-title">三轴运动<br>Three Axes of Aircraft Motion</h2></div><p>无论单发还是双发，每个运动都绕一条穿过飞机重心的轴发生。最实用的记忆方法：Pitch 是点头，Yaw 是摇头，Roll 是歪头。</p></div>
+      <div class="axes">
+        <article class="axis" style="--c:var(--control)">
+          <svg viewBox="0 0 260 150" aria-label="Pitch 俯仰图示"><defs><marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ff9c38"/></marker></defs><path d="M45 85h153l22 8-22 8H45l-17-8z" fill="none" stroke="#302b28" stroke-width="3"/><path d="M94 85l32-40h16l-18 40M100 100l25 22h12l-11-22" fill="none" stroke="#302b28" stroke-width="3"/><circle cx="128" cy="93" r="5" fill="#ff9c38"/><path d="M51 121A88 88 0 0 1 204 52" fill="none" stroke="#ff9c38" stroke-width="4" marker-end="url(#m1)"/><path d="M57 56A88 88 0 0 0 43 92" fill="none" stroke="#ff9c38" stroke-width="4" marker-end="url(#m1)"/><text x="130" y="139" text-anchor="middle" fill="#c75a18" font-size="12">NOSE UP ↕ NOSE DOWN</text></svg>
+          <h3>Pitch <span class="motion">俯仰 · 点头</span></h3><p>绕 Lateral Axis 横轴旋转。<br>主要由 Elevator 升降舵控制。<span>Rotation about the lateral axis; primarily controlled by the elevator.</span></p>
+        </article>
+        <article class="axis" style="--c:var(--aero)">
+          <svg viewBox="0 0 260 150" aria-label="Yaw 偏航图示"><defs><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f25f29"/></marker></defs><path d="M130 23l11 45 72 22v11l-72-8-5 39h-12l-5-39-72 8V90l72-22z" fill="none" stroke="#302b28" stroke-width="3"/><circle cx="130" cy="85" r="5" fill="#f25f29"/><path d="M53 48A95 72 0 0 1 212 63" fill="none" stroke="#f25f29" stroke-width="4" marker-end="url(#m2)"/><path d="M207 118A95 72 0 0 1 48 103" fill="none" stroke="#f25f29" stroke-width="4" marker-end="url(#m2)"/></svg>
+          <h3>Yaw <span class="motion">偏航 · 摇头</span></h3><p>绕 Vertical Axis 垂直轴旋转。<br>主要由 Rudder 方向舵控制。<span>Rotation about the vertical axis; primarily controlled by the rudder.</span></p>
+        </article>
+        <article class="axis" style="--c:var(--structure)">
+          <svg viewBox="0 0 260 150" aria-label="Roll 横滚图示"><defs><marker id="m3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9a6547"/></marker></defs><path d="M31 82h198M121 77l9-31 9 31 28 21-28-8-4 34h-10l-4-34-28 8z" fill="none" stroke="#302b28" stroke-width="3"/><circle cx="130" cy="82" r="5" fill="#9a6547"/><path d="M75 35A67 67 0 0 1 194 96" fill="none" stroke="#9a6547" stroke-width="4" marker-end="url(#m3)"/><path d="M188 119A67 67 0 0 1 66 61" fill="none" stroke="#9a6547" stroke-width="4" marker-end="url(#m3)"/></svg>
+          <h3>Roll <span class="motion">横滚 · 歪头</span></h3><p>绕 Longitudinal Axis 纵轴旋转。<br>主要由 Ailerons 副翼控制。<span>Rotation about the longitudinal axis; primarily controlled by the ailerons.</span></p>
+        </article>
+      </div>
+      <div class="memory"><div style="--c:var(--control)"><strong>Pitch = 点头 ↑↓</strong><span>Elevator · 升降舵</span></div><div style="--c:var(--aero)"><strong>Yaw = 摇头 ←→</strong><span>Rudder · 方向舵</span></div><div style="--c:var(--structure)"><strong>Roll = 歪头 ↶↷</strong><span>Ailerons · 副翼</span></div></div>
+    </section>
+  </main>
+  <footer class="shell">学习提示：飞机正常转弯通常先用副翼建立坡度（Roll），同时配合方向舵协调偏航（Yaw），再用升降舵管理俯仰（Pitch）。</footer>
+  <script>
+    document.querySelectorAll('.viewer').forEach(viewer=>{
+      const buttons=[...viewer.querySelectorAll('.filter')];
+      const callouts=[...viewer.querySelectorAll('.callout')];
+      buttons.forEach(button=>button.addEventListener('click',()=>{
+        buttons.forEach(b=>b.classList.toggle('active',b===button));
+        const selected=button.dataset.filter;
+        callouts.forEach(label=>label.classList.toggle('is-muted',selected!=='all'&&label.dataset.cat!==selected));
+      }));
+    });
+  </script>
+</body>
+</html>
