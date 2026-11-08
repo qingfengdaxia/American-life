@@ -8,6 +8,16 @@ section{background:var(--card);border-radius:16px;padding:18px;margin:16px 0;box
 table{width:100%;border-collapse:collapse;font-size:.94rem}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid #eee;vertical-align:top}th{color:#6d6256;background:var(--soft)}.note{background:var(--soft);border-left:4px solid var(--accent);padding:12px 14px;border-radius:8px;margin:14px 0}.small{font-size:.88rem;color:var(--muted)}
 .search{position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2}.search input{width:100%;font-size:16px;padding:12px 14px;border:1.5px solid #ffc79f;border-radius:12px}
 @media(max-width:650px){.wrap{padding:12px}.hero{padding:20px 16px}h1{font-size:1.55rem}section{padding:14px}.top{gap:6px}th:nth-child(2),td:nth-child(2){min-width:125px}}
+</style>
+<style>
+html{scroll-behavior:smooth}section[id]{scroll-margin-top:72px}
+.drawer-toggle{position:fixed;right:14px;top:calc(env(safe-area-inset-top, 0px) + 12px);z-index:1002;border:2px solid #fff;border-radius:999px;background:var(--accent);color:#fff;padding:12px 17px;font-size:15px;font-weight:800;box-shadow:0 5px 18px #9d3d0080;cursor:pointer}
+.side-drawer{position:fixed;inset:0 auto 0 0;width:min(86vw,360px);z-index:1004;background:#fffaf6;box-shadow:7px 0 24px #0003;transform:translateX(-105%);transition:transform .24s ease;overflow:auto;padding:18px 16px 28px}
+.side-drawer.open{transform:translateX(0)}.drawer-backdrop{position:fixed;inset:0;background:#0006;z-index:1003;display:none}.drawer-backdrop.open{display:block}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:-18px;background:#fffaf6;padding:14px 0 10px;border-bottom:2px solid var(--line)}
+.drawer-head strong{color:var(--accent);font-size:1.15rem}.drawer-close{border:0;background:var(--soft);color:var(--accent);border-radius:50%;width:38px;height:38px;font-size:24px;cursor:pointer}
+.drawer-group{margin:16px 0 7px;color:#8a4a1a;font-weight:900}.side-drawer a{display:block;color:#4e3425;text-decoration:none;padding:10px 9px;border-bottom:1px solid var(--line);border-radius:8px}.side-drawer a:hover,.side-drawer a:focus{background:var(--soft);color:var(--accent)}
+body.drawer-open{overflow:hidden}@media(max-width:650px){.drawer-toggle{right:10px;top:calc(env(safe-area-inset-top, 0px) + 10px);padding:11px 14px;font-size:14px}.side-drawer{padding-left:13px;padding-right:13px;padding-top:calc(env(safe-area-inset-top, 0px) + 12px)}}
 </style></head><body><div class="wrap">
 <div class="hero"><h1><span style="font-weight:900">VidPrep</span> × PRADERA 菜单学习版</h1><p>English · IPA · 中文 · Ingredients｜手机点餐速查</p></div>
 <div class="note"><b>发音说明：</b>英语词采用偏美式英语 IPA；西班牙语菜名采用常见墨西哥西班牙语读法。菜单里混合英西语的名称按实际组成分别标注。照片中同名项目只收录一次；同一项目在旧版总览图与现场新版菜单价格不一致时，以现场新版为优先。少数被花朵/页面边缘遮挡、无法可靠辨认的价格不臆测。</div>
@@ -510,14 +520,366 @@ q.addEventListener('input',()=>{const s=q.value.toLowerCase().trim();document.qu
         </div></div>
     </section>
 </div>
+<style>
+.review-note{background:#fff7ed;border:1px solid #ffd2b3;border-left:5px solid var(--accent);border-radius:12px;padding:12px 14px;margin:12px 0;color:#6f4a32}
+.keyline{margin-top:9px;padding-top:9px;border-top:1px dashed #ead5c5;color:#5f554e;font-size:.92rem}
+.keyline b{color:#a84600}.group-title{grid-column:1/-1;margin:10px 0 0;color:#9a3d00;font-size:1.05rem;border-bottom:2px solid #ffd8bc;padding-bottom:6px}
+</style>
+<div class="wrap">
+<section class="section" id="review-added-menus">
+  <h2>本地审核新增菜单｜日本拉面 · Sprouts · Phở Lovers</h2>
+  <div class="review-note"><b>审核规则：</b>大小份只保留菜单上的小份价格，不显示 S/L；煎饺按数量计价，保留各数量价格。Phở 相似品项只列不同肉类或关键成分，不重复通用汤底说明。</div>
+  <div class="new-nav"><a href="#ramen-review">Japanese Ramen｜日本拉面</a><a href="#sprouts-sandwich-review">Sprouts Farmers Market｜三明治</a><a href="#sprouts-smoothie-review">Sprouts Farmers Market｜奶昔</a><a href="#pho-review">Phở Lovers｜越南河粉与饮品</a></div>
+</section>
+
+<section class="section newmenu" id="ramen-review">
+  <h2>Japanese Ramen｜日本拉面</h2>
+  <div class="newgrid">
+    <h3 class="group-title">Ramen｜拉面</h3>
+    <div class="newdish" data-search="tonkotsu 豚骨拉面 hakata"><div class="newtop"><div><b>Tonkotsu</b><div class="ipa">/tɑnˈkɑtsu/</div><div class="zh">豚骨拉面</div></div><div class="price">$15.50</div></div><div class="keyline"><b>Key:</b> signature Hakata tonkotsu broth｜招牌博多豚骨汤</div></div>
+    <div class="newdish" data-search="black tonkotsu 黑蒜豚骨拉面 garlic"><div class="newtop"><div><b>Black Tonkotsu</b><div class="ipa">/blæk tɑnˈkɑtsu/</div><div class="zh">黑蒜豚骨拉面</div></div><div class="price">$16</div></div><div class="keyline"><b>Key:</b> garlic flavor, mildly sweet｜蒜香、微甜</div></div>
+    <div class="newdish" data-search="mentai tonkotsu 明太子豚骨拉面"><div class="newtop"><div><b>Mentai Tonkotsu</b><div class="ipa">/mɛnˈtaɪ tɑnˈkɑtsu/</div><div class="zh">明太子豚骨拉面</div></div><div class="price">$16</div></div><div class="keyline"><b>Key:</b> mentai paste, roasted crushed garlic, slightly spicy｜明太子酱、烤蒜碎、微辣</div></div>
+    <div class="newdish" data-search="hb shoyu 酱油拉面 fish broth"><div class="newtop"><div><b>HB Shoyu</b><div class="ipa">/ˌeɪtʃˈbi ˈʃɔɪu/</div><div class="zh">HB 酱油拉面</div></div><div class="price">$15.50</div></div><div class="keyline"><b>Key:</b> fish and tonkotsu broth, crafted noodles｜鱼汤与豚骨汤、特制面</div></div>
+    <div class="newdish" data-search="god fire 火辣豚骨拉面 chili paste"><div class="newtop"><div><b>God Fire</b><div class="ipa">/ɡɑd ˈfaɪɚ/</div><div class="zh">火辣豚骨拉面</div></div><div class="price">$16</div></div><div class="keyline"><b>Key:</b> pork broth, homemade chili paste; spice level 1–4｜猪骨汤、自制辣酱；辣度 1–4</div></div>
+    <div class="newdish" data-search="black devil 黑蒜辣豚骨"><div class="newtop"><div><b>Black Devil</b><div class="ipa">/blæk ˈdɛvəl/</div><div class="zh">黑蒜辣豚骨拉面</div></div><div class="price">$16.50</div></div><div class="keyline"><b>Key:</b> God Fire + Black Tonkotsu｜火辣豚骨＋黑蒜豚骨</div></div>
+    <div class="newdish" data-search="miso tonkotsu 味噌豚骨"><div class="newtop"><div><b>Miso Tonkotsu</b><div class="ipa">/ˈmisoʊ tɑnˈkɑtsu/</div><div class="zh">味噌豚骨拉面</div></div><div class="price">$17</div></div><div class="keyline"><b>Key:</b> tonkotsu + miso｜豚骨汤＋味噌</div></div>
+    <div class="newdish" data-search="spicy miso tonkotsu 辣味噌豚骨"><div class="newtop"><div><b>Spicy Miso Tonkotsu</b><div class="ipa">/ˈspaɪsi ˈmisoʊ tɑnˈkɑtsu/</div><div class="zh">辣味噌豚骨拉面</div></div><div class="price">$17.50</div></div><div class="keyline"><b>Key:</b> tonkotsu + spicy miso｜豚骨汤＋辣味噌</div></div>
+
+    <h3 class="group-title">Signature Toppings / Spicy Paste｜招牌加料 / 辣酱</h3>
+    <div class="newdish" data-search="standard plus toppings 标准加料"><div class="newtop"><div><b>Standard Plus Toppings</b><div class="ipa">/ˈstændɚd plʌs ˈtɑpɪŋz/</div><div class="zh">标准加料组合</div></div><div class="price">$2.50</div></div></div>
+    <div class="newdish" data-search="premium toppings 高级加料"><div class="newtop"><div><b>Premium Toppings</b><div class="ipa">/ˈprimiəm ˈtɑpɪŋz/</div><div class="zh">高级加料组合</div></div><div class="price">$4.50</div></div></div>
+    <div class="newdish" data-search="everything toppings 全部加料"><div class="newtop"><div><b>Everything Toppings</b><div class="ipa">/ˈɛvriˌθɪŋ ˈtɑpɪŋz/</div><div class="zh">全部加料组合</div></div><div class="price">$7.50</div></div></div>
+    <div class="newdish" data-search="fire ball spicy paste 辣酱球"><div class="newtop"><div><b>Fire Ball (Level 1–4)</b><div class="ipa">/ˈfaɪɚ bɔl/</div><div class="zh">火球辣酱（1–4级）</div></div><div class="price">$2</div></div><div class="keyline">Level 5: +$0.50｜5级另加 $0.50</div></div>
+    <div class="newdish" data-search="flaming devil 辣酱"><div class="newtop"><div><b>Flaming Devil</b><div class="ipa">/ˈfleɪmɪŋ ˈdɛvəl/</div><div class="zh">烈焰魔鬼辣酱</div></div><div class="price">$3</div></div></div>
+
+    <h3 class="group-title">Individual Toppings｜单项加料</h3>
+    <div class="newdish" data-search="takana mustard greens 高菜"><div class="newtop"><div><b>Takana</b><div class="ipa">/təˈkɑnə/</div><div class="zh">高菜</div></div><div class="price">$1.50</div></div></div>
+    <div class="newdish" data-search="extra noodles 加面"><div class="newtop"><div><b>Extra Noodles</b><div class="ipa">/ˈɛkstrə ˈnudəlz/</div><div class="zh">加面</div></div><div class="price">$2</div></div></div>
+    <div class="newdish" data-search="steamed vegetables 蒸蔬菜"><div class="newtop"><div><b>Steamed Vegetables</b><div class="ipa">/stimd ˈvɛdʒtəbəlz/</div><div class="zh">蒸蔬菜</div></div><div class="price">$2</div></div></div>
+    <div class="newdish" data-search="seaweed 3pcs 海苔"><div class="newtop"><div><b>Seaweed (3 pcs)</b><div class="ipa">/ˈsiˌwid/</div><div class="zh">海苔（3片）</div></div><div class="price">$1.50</div></div></div>
+    <div class="newdish" data-search="chashu 3pcs 叉烧"><div class="newtop"><div><b>Chashu (3 pcs)</b><div class="ipa">/ˈtʃɑʃu/</div><div class="zh">叉烧（3片）</div></div><div class="price">$3.50</div></div></div>
+    <div class="newdish" data-search="wood ear mushrooms 木耳"><div class="newtop"><div><b>Wood Ear Mushrooms</b><div class="ipa">/wʊd ɪr ˈmʌʃˌrumz/</div><div class="zh">木耳</div></div><div class="price">$1.50</div></div></div>
+    <div class="newdish" data-search="bamboo shoots 竹笋"><div class="newtop"><div><b>Bamboo Shoots</b><div class="ipa">/bæmˈbu ʃuts/</div><div class="zh">竹笋</div></div><div class="price">$1.50</div></div></div>
+    <div class="newdish" data-search="flavored egg 溏心蛋"><div class="newtop"><div><b>Flavored Egg</b><div class="ipa">/ˈfleɪvɚd ɛɡ/</div><div class="zh">溏心味玉蛋</div></div><div class="price">$2</div></div></div>
+
+    <h3 class="group-title">Side Dishes｜小食</h3>
+    <div class="newdish" data-search="hakata style gyoza 煎饺"><div class="newtop"><div><b>Hakata Style Gyoza</b><div class="ipa">/həˈkɑtə staɪl ˈɡjoʊzə/</div><div class="zh">博多风煎饺</div></div><div class="price">5/$5 · 10/$9.50 · 20/$18 · 30/$28</div></div></div>
+    <div class="newdish" data-search="original karaage 日式炸鸡"><div class="newtop"><div><b>Original Karaage</b><div class="ipa">/əˈrɪdʒənəl kəˈrɑɡeɪ/</div><div class="zh">原味日式炸鸡</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="spicy karaage 辣味炸鸡"><div class="newtop"><div><b>Spicy Karaage</b><div class="ipa">/ˈspaɪsi kəˈrɑɡeɪ/</div><div class="zh">辣味日式炸鸡</div></div><div class="price">$6.50</div></div></div>
+    <div class="newdish" data-search="edamame 毛豆"><div class="newtop"><div><b>Edamame</b><div class="ipa">/ˌɛdəˈmɑmeɪ/</div><div class="zh">毛豆</div></div><div class="price">$5</div></div></div>
+    <div class="newdish" data-search="fried rice 炒饭"><div class="newtop"><div><b>Fried Rice</b><div class="ipa">/fraɪd raɪs/</div><div class="zh">炒饭</div></div><div class="price">$11</div></div></div>
+    <div class="newdish" data-search="cabbage salad 卷心菜沙拉"><div class="newtop"><div><b>Cabbage Salad</b><div class="ipa">/ˈkæbɪdʒ ˈsæləd/</div><div class="zh">卷心菜沙拉</div></div><div class="price">$6</div></div></div>
+
+    <h3 class="group-title">Mini Bowls｜迷你饭</h3>
+    <div class="newdish" data-search="cube chashu bowl 叉烧丁饭"><div class="newtop"><div><b>Cube Chashu</b><div class="ipa">/kjub ˈtʃɑʃu/</div><div class="zh">叉烧丁饭</div></div><div class="price">$6.50</div></div></div>
+    <div class="newdish" data-search="mentai bowl 明太子饭"><div class="newtop"><div><b>Mentai</b><div class="ipa">/mɛnˈtaɪ/</div><div class="zh">明太子饭</div></div><div class="price">$6.50</div></div></div>
+    <div class="newdish" data-search="curry rice 咖喱饭"><div class="newtop"><div><b>Curry Rice</b><div class="ipa">/ˈkɝi raɪs/</div><div class="zh">咖喱饭</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="karaage curry 炸鸡咖喱饭"><div class="newtop"><div><b>Karaage Curry</b><div class="ipa">/kəˈrɑɡeɪ ˈkɝi/</div><div class="zh">日式炸鸡咖喱饭</div></div><div class="price">$9.50</div></div></div>
+    <div class="newdish" data-search="katsu curry 炸猪排咖喱饭"><div class="newtop"><div><b>Katsu Curry</b><div class="ipa">/ˈkɑtsu ˈkɝi/</div><div class="zh">炸猪排咖喱饭</div></div><div class="price">$10</div></div></div>
+    <div class="newdish" data-search="sliced chashu 叉烧片"><div class="newtop"><div><b>Sliced Chashu</b><div class="ipa">/slaɪst ˈtʃɑʃu/</div><div class="zh">叉烧片</div></div><div class="price">$6.50</div></div></div>
+    <div class="newdish" data-search="white rice 白米饭"><div class="newtop"><div><b>White Rice</b><div class="ipa">/waɪt raɪs/</div><div class="zh">白米饭</div></div><div class="price">$3.50</div></div></div>
+  </div>
+</section>
+
+<section class="section newmenu" id="sprouts-sandwich-review">
+  <h2>Sprouts Farmers Market｜Sandwiches 三明治</h2>
+  <div class="review-note">三明治基础价均为 $4.99。可自选面包与常用蔬菜/酱料；下方另列加料价格。</div>
+  <div class="newgrid">
+    <div class="newdish" data-search="blt bacon lettuce tomato 培根生菜番茄"><div class="newtop"><div><b>B.L.T.</b><div class="ipa">/ˌbi ɛl ˈti/</div><div class="zh">培根生菜番茄三明治</div></div><div class="price">$4.99</div></div><div class="keyline">bacon · lettuce · tomato｜培根 · 生菜 · 番茄</div></div>
+    <div class="newdish" data-search="chicken salad sandwich 鸡肉沙拉"><div class="newtop"><div><b>Chicken Salad</b><div class="ipa">/ˈtʃɪkɪn ˈsæləd/</div><div class="zh">鸡肉沙拉三明治</div></div><div class="price">$4.99</div></div></div>
+    <div class="newdish" data-search="ham sandwich 火腿"><div class="newtop"><div><b>Ham</b><div class="ipa">/hæm/</div><div class="zh">火腿三明治</div></div><div class="price">$4.99</div></div></div>
+    <div class="newdish" data-search="roast beef sandwich 烤牛肉"><div class="newtop"><div><b>Roast Beef</b><div class="ipa">/roʊst bif/</div><div class="zh">烤牛肉三明治</div></div><div class="price">$4.99</div></div></div>
+    <div class="newdish" data-search="tuna salad sandwich 金枪鱼沙拉"><div class="newtop"><div><b>Tuna Salad</b><div class="ipa">/ˈtunə ˈsæləd/</div><div class="zh">金枪鱼沙拉三明治</div></div><div class="price">$4.99</div></div></div>
+    <div class="newdish" data-search="turkey sandwich 火鸡肉"><div class="newtop"><div><b>Turkey</b><div class="ipa">/ˈtɝki/</div><div class="zh">火鸡肉三明治</div></div><div class="price">$4.99</div></div></div>
+    <div class="newdish" data-search="vegetarian sandwich 素食 avocado cheese"><div class="newtop"><div><b>Vegetarian</b><div class="ipa">/ˌvɛdʒəˈtɛriən/</div><div class="zh">素食三明治</div></div><div class="price">$4.99</div></div><div class="keyline">avocado + cheese included｜含牛油果与芝士</div></div>
+    <div class="newdish" data-search="build your own sandwich 自选三明治"><div class="newtop"><div><b>Build Your Own</b><div class="ipa">/bɪld jʊr oʊn/</div><div class="zh">自选三明治组合</div></div><div class="price">Options</div></div><div class="keyline"><b>Bread:</b> classic white, sourdough, multigrain｜白面包、酸面包、多谷物<br><b>Toppings:</b> lettuce, tomato, red onion, cucumber, bell peppers, pickles｜生菜、番茄、红洋葱、黄瓜、甜椒、酸黄瓜<br><b>Sauces:</b> sub dressing, mayonnaise, yellow/brown mustard｜三明治酱、蛋黄酱、黄/棕芥末</div></div>
+    <div class="newdish" data-search="sandwich add-ons cheese bacon avocado hummus"><div class="newtop"><div><b>Sandwich Add-ons</b><div class="ipa">/ˈsænwɪtʃ ˈædˌɑnz/</div><div class="zh">三明治加料</div></div><div class="price">+$1–$2</div></div><div class="keyline">avocado / cheese +$1; bacon / extra meat / deluxe meat / hummus +$2｜牛油果/芝士 +$1；培根/加肉/升级肉类/鹰嘴豆泥 +$2</div></div>
+  </div>
+</section>
+
+<section class="section newmenu" id="sprouts-smoothie-review">
+  <h2>Sprouts Farmers Market｜Smoothies 奶昔</h2>
+  <div class="newgrid">
+    <div class="newdish" data-search="acai smoothie 巴西莓"><div class="newtop"><div><b>Acai Smoothie</b><div class="ipa">/əˈsaɪi ˈsmuði/</div><div class="zh">巴西莓奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">acai · banana · strawberries · coconut water｜巴西莓 · 香蕉 · 草莓 · 椰子水</div></div>
+    <div class="newdish" data-search="chunky monkey peanut butter banana 猴子花生酱"><div class="newtop"><div><b>Chunky Monkey</b><div class="ipa">/ˈtʃʌŋki ˈmʌŋki/</div><div class="zh">花生酱香蕉奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">peanut butter · chia seed · banana · agave · almond milk｜花生酱 · 奇亚籽 · 香蕉 · 龙舌兰糖浆 · 杏仁奶</div></div>
+    <div class="newdish" data-search="coffee date cold brew dates 咖啡枣"><div class="newtop"><div><b>Coffee Date</b><div class="ipa">/ˈkɔfi deɪt/</div><div class="zh">冷萃咖啡椰枣奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">cold brew · dates · almond butter · banana · agave｜冷萃咖啡 · 椰枣 · 杏仁酱 · 香蕉 · 龙舌兰糖浆</div></div>
+    <div class="newdish" data-search="green detox 菠菜羽衣甘蓝排毒"><div class="newtop"><div><b>Green Detox</b><div class="ipa">/ɡrin ˈdiˌtɑks/</div><div class="zh">绿色排毒奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">spinach · kale · mint · lemon · ginger · banana · honey · almond milk｜菠菜 · 羽衣甘蓝 · 薄荷 · 柠檬 · 姜 · 香蕉 · 蜂蜜 · 杏仁奶</div></div>
+    <div class="newdish" data-search="tropical glowgetter pineapple spirulina 热带"><div class="newtop"><div><b>Tropical Glowgetter</b><div class="ipa">/ˈtrɑpɪkəl ˈɡloʊˌɡɛtɚ/</div><div class="zh">热带焕亮奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">agave · banana · pineapple · coconut milk · collagen · spirulina｜龙舌兰糖浆 · 香蕉 · 菠萝 · 椰奶 · 胶原蛋白 · 螺旋藻</div></div>
+    <div class="newdish" data-search="vanilla kale 香草羽衣甘蓝"><div class="newtop"><div><b>Vanilla Kale</b><div class="ipa">/vəˈnɪlə keɪl/</div><div class="zh">香草羽衣甘蓝奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">kale · almond butter · banana · vanilla · agave · almond milk｜羽衣甘蓝 · 杏仁酱 · 香蕉 · 香草 · 龙舌兰糖浆 · 杏仁奶</div></div>
+    <div class="newdish" data-search="verry berry mixed berries 莓果"><div class="newtop"><div><b>Verry Berry</b><div class="ipa">/ˈvɛri ˈbɛri/</div><div class="zh">缤纷莓果奶昔</div></div><div class="price">$6.99</div></div><div class="keyline">strawberries · blueberries · blackberries · raspberries · banana · agave · almond milk｜草莓 · 蓝莓 · 黑莓 · 覆盆子 · 香蕉 · 龙舌兰糖浆 · 杏仁奶</div></div>
+    <div class="newdish" data-search="smoothie extras collagen coconut spirulina"><div class="newtop"><div><b>Smoothie Extras</b><div class="ipa">/ˈsmuði ˈɛkstrəz/</div><div class="zh">奶昔加料</div></div><div class="price">+$0.75 / $1.50</div></div><div class="keyline">collagen, shredded coconut, spirulina, turmeric +$0.75; whey/vegan protein, bee pollen +$1.50｜胶原蛋白、椰丝、螺旋藻、姜黄 +$0.75；乳清/植物蛋白、蜂花粉 +$1.50</div></div>
+  </div>
+</section>
+
+<section class="section newmenu" id="pho-review">
+  <h2>Phở Lovers｜越南河粉、加料与饮品</h2>
+  <div class="review-note">河粉默认共用米粉与汤底说明；每项只突出不同肉类。照片中原有两档价格时，仅保留较低价格。</div>
+  <div class="newgrid">
+    <h3 class="group-title">Phở Đặc Biệt｜特色河粉</h3>
+    <div class="newdish" data-search="17 pho suon bo beef back ribs 牛肋排"><div class="newtop"><div><b>17. Phở Sườn Bò</b><div class="ipa">/fɜː swən bɔ/</div><div class="zh">牛肋排河粉</div></div><div class="price">$16.50</div></div><div class="keyline"><b>Key meat:</b> beef back ribs｜牛肋排</div></div>
+    <div class="newdish" data-search="18 pho tai filet mignon rare 菲力牛排"><div class="newtop"><div><b>18. Phở Tái Filet Mignon</b><div class="ipa">/fɜː taɪ fɪˈleɪ ˈmɪnjɑn/</div><div class="zh">生菲力牛排河粉</div></div><div class="price">$17.50</div></div><div class="keyline"><b>Key meat:</b> rare filet mignon｜生菲力牛排</div></div>
+    <div class="newdish" data-search="19 pho tai lan stir-fry filet mignon 炒嫩牛柳"><div class="newtop"><div><b>19. Phở Tái Lăn (Filet Mignon)</b><div class="ipa">/fɜː taɪ lɑn fɪˈleɪ ˈmɪnjɑn/</div><div class="zh">炒嫩菲力牛柳河粉</div></div><div class="price">$17.50</div></div><div class="keyline"><b>Key meat:</b> stir-fried rare filet mignon｜炒嫩菲力牛柳</div></div>
+    <div class="newdish" data-search="20 pho duoi bo oxtail 牛尾"><div class="newtop"><div><b>20. Phở Đuôi Bò</b><div class="ipa">/fɜː duːi bɔ/</div><div class="zh">牛尾河粉</div></div><div class="price">$17.50</div></div><div class="keyline"><b>Key meat:</b> oxtail｜牛尾</div></div>
+    <div class="newdish" data-search="21 pho tai duoi bo rare beef oxtail 生牛肉牛尾"><div class="newtop"><div><b>21. Phở Tái Đuôi Bò</b><div class="ipa">/fɜː taɪ duːi bɔ/</div><div class="zh">生牛肉牛尾河粉</div></div><div class="price">$17.50</div></div><div class="keyline"><b>Key meat:</b> rare beef + oxtail｜生牛肉＋牛尾</div></div>
+    <div class="newdish" data-search="22 pho xe lua lovers super bowl 特大碗"><div class="newtop"><div><b>22. Phở Xe Lửa</b><div class="ipa">/fɜː sɛ lɯə/</div><div class="zh">Lovers 特大碗河粉</div></div><div class="price">$20</div></div><div class="keyline"><b>Key:</b> Lovers Super Bowl｜Lovers 招牌特大碗</div></div>
+
+    <h3 class="group-title">Sides &amp; Extras｜加料 / 配菜</h3>
+    <div class="newdish" data-search="them thit extra meat 加肉 rare beef brisket flank tendon tripe beef balls"><div class="newtop"><div><b>Thêm Thịt</b><div class="ipa">/tɛm tɪt/</div><div class="zh">加肉</div></div><div class="price">$6</div></div><div class="keyline">rare beef · well-cooked brisket · fatty flank · tendon · tripe · beef balls｜生牛肉 · 熟牛腩 · 肥牛腩 · 牛筋 · 牛肚 · 牛肉丸</div></div>
+    <div class="newdish" data-search="them tom extra shrimp 加虾"><div class="newtop"><div><b>Thêm Tôm</b><div class="ipa">/tɛm tom/</div><div class="zh">加虾</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="soup hot ga egg yolks 蛋黄汤"><div class="newtop"><div><b>Soup Hột Gà</b><div class="ipa">/sup hɔt ɡa/</div><div class="zh">双蛋黄配汤</div></div><div class="price">$4</div></div><div class="keyline">2 egg yolks with soup｜两个蛋黄配汤</div></div>
+    <div class="newdish" data-search="chen duoi bo oxtail side 牛尾小碗"><div class="newtop"><div><b>Chén Đuôi Bò</b><div class="ipa">/tʃɛn duːi bɔ/</div><div class="zh">牛尾配菜碗</div></div><div class="price">$7</div></div></div>
+
+    <h3 class="group-title">Coffee &amp; Tea｜咖啡 / 茶</h3>
+    <div class="newdish" data-search="ca phe sua da iced vietnamese milk coffee 越南冰奶咖啡"><div class="newtop"><div><b>Cà Phê Sữa Đá</b><div class="ipa">/ka fe sɯə da/</div><div class="zh">越南冰奶咖啡</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="ca phe den da iced black coffee 冰黑咖啡"><div class="newtop"><div><b>Cà Phê Đen Đá</b><div class="ipa">/ka fe dɛn da/</div><div class="zh">加糖冰黑咖啡</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="ca phe den nong hot black coffee 热黑咖啡"><div class="newtop"><div><b>Cà Phê Đen Nóng</b><div class="ipa">/ka fe dɛn nɔŋ/</div><div class="zh">加糖热黑咖啡</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="ca phe sua nong hot vietnamese milk coffee 热越南牛奶咖啡"><div class="newtop"><div><b>Cà Phê Sữa Nóng</b><div class="ipa">/ka fe sɯə nɔŋ/</div><div class="zh">热越南牛奶咖啡</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="tra chanh day passion fruit tea 百香果茶"><div class="newtop"><div><b>Trà Chanh Dây</b><div class="ipa">/tʃa tʃaɲ zaɪ/</div><div class="zh">百香果茶</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="tra dau strawberry tea 草莓茶"><div class="newtop"><div><b>Trà Dâu</b><div class="ipa">/tʃa zəʊ/</div><div class="zh">草莓茶</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="tra dao peach tea 桃子茶"><div class="newtop"><div><b>Trà Đào</b><div class="ipa">/tʃa daːw/</div><div class="zh">桃子茶</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="tra bi dao winter melon tea 冬瓜茶"><div class="newtop"><div><b>Trà Bí Đao</b><div class="ipa">/tʃa bi daːw/</div><div class="zh">冬瓜茶</div></div><div class="price">$6</div></div></div>
+    <div class="newdish" data-search="tra da iced tea 冰红茶"><div class="newtop"><div><b>Trà Đá</b><div class="ipa">/tʃa da/</div><div class="zh">无糖冰茶</div></div><div class="price">$3</div></div></div>
+    <div class="newdish" data-search="tra nong hot tea 热茶"><div class="newtop"><div><b>Trà Nóng</b><div class="ipa">/tʃa nɔŋ/</div><div class="zh">无糖热茶</div></div><div class="price">$3</div></div></div>
+    <div class="newdish" data-search="nuoc chai bottled water 瓶装水"><div class="newtop"><div><b>Nước Chai</b><div class="ipa">/nɯək tʃaɪ/</div><div class="zh">瓶装水</div></div><div class="price">$3</div></div></div>
+
+    <h3 class="group-title">Soft Drinks｜汽水（每款 $3）</h3>
+    <div class="newdish" data-search="soft drinks soda 汽水 7up root beer lemon brisk dr pepper ginger ale sunkist coke coke zero diet coke pepsi sprite mountain dew"><div class="newtop"><div><b>Soft Drinks</b><div class="ipa">/sɔft drɪŋks/</div><div class="zh">汽水</div></div><div class="price">$3 each</div></div><div class="keyline">7UP · Root Beer · Lemon Brisk · Dr Pepper · Ginger Ale · Sunkist · Coke · Coke Zero · Diet Coke · Pepsi · Sprite · Mountain Dew</div></div>
+  </div>
+</section>
+</div>
+<div class="wrap">
+<section class="section" id="review-added-2026-11-07">
+  <h2>最新审核新增｜Chuan Pot · Coffee N More</h2>
+  <div class="review-note"><b>照片整理说明：</b>保留照片中可可靠辨认的英文原名、中文、IPA 与价格。Coffee N More 有 Regular / Large 两档时，沿用你的规则，只保留 Regular 价格且不显示大小份。Chuan Pot 的午餐、晚餐、儿童与素食属于不同用餐类别，因此分别保留。</div>
+  <div class="new-nav"><a href="#chuan-pot-review">Chuan Pot｜火锅、甜品与饮品</a><a href="#coffee-n-more-review">Coffee N More｜咖啡、茶、奶茶、果汁与鲷鱼烧</a></div>
+</section>
+
+<section class="section newmenu" id="chuan-pot-review">
+  <h2>Chuan Pot｜川火锅</h2>
+  <div class="review-note"><b>照片版本差异：</b>素食价在中文单页为 $26.99、英文单页为 $28.99；剩菜费分别显示 $5.99/盘与 $12.99/盘。审核版同时保留，待你确认采用哪一版。</div>
+  <div class="newgrid">
+    <h3 class="group-title">All You Can Eat Pricing｜自助火锅价格</h3>
+    <div class="newdish" data-search="chuan pot lunch 午餐"><div class="newtop"><div><b>Lunch</b><div class="ipa">/lʌntʃ/</div><div class="zh">午餐（周一至周五 12–3 PM，节假日除外）</div></div><div class="price">$28.99</div></div></div>
+    <div class="newdish" data-search="chuan pot dinner regular 晚餐"><div class="newtop"><div><b>Dinner / Regular</b><div class="ipa">/ˈdɪnɚ / ˈrɛɡjələr/</div><div class="zh">晚餐 / 常规自助</div></div><div class="price">$32.99</div></div></div>
+    <div class="newdish" data-search="kids children 儿童"><div class="newtop"><div><b>Kids</b><div class="ipa">/kɪdz/</div><div class="zh">儿童（照片标注：10岁以下；另一页标注不超过55英寸）</div></div><div class="price">$17.99</div></div></div>
+    <div class="newdish" data-search="babies toddlers 婴幼儿 free"><div class="newtop"><div><b>Babies and Toddlers</b><div class="ipa">/ˈbeɪbiz ænd ˈtɑdlɚz/</div><div class="zh">婴儿及幼儿</div></div><div class="price">Free</div></div></div>
+    <div class="newdish" data-search="vegetarian 素食 no meat seafood"><div class="newtop"><div><b>Vegetarian</b><div class="ipa">/ˌvɛdʒəˈtɛriən/</div><div class="zh">素食（仅蔬菜，不含肉类或海鲜）</div></div><div class="price">$26.99 / $28.99*</div></div><div class="keyline">*两张照片价格不同，等待审核确认。</div></div>
+    <div class="newdish" data-search="time limit leftover charge 用餐时间 剩菜费"><div class="newtop"><div><b>Time Limit / Leftover Charge</b><div class="ipa">/taɪm ˈlɪmət / ˈlɛftˌoʊvɚ tʃɑrdʒ/</div><div class="zh">用餐时间 / 剩菜费</div></div><div class="price">90 min · $5.99/$12.99 per plate*</div></div><div class="keyline">*两张照片的剩菜费不同。</div></div>
+
+    <h3 class="group-title">Broths｜锅底</h3>
+    <div class="newdish" data-search="chuan pot house special sichuan broth peppercorn 川一麻辣锅底"><div class="newtop"><div><b>Chuan Pot House Special</b><div class="ipa">/tʃwɑn pɑt haʊs ˈspɛʃəl/</div><div class="zh">川一麻辣锅底</div></div></div><div class="keyline">traditional Sichuan broth with peppercorns｜传统四川花椒麻辣汤底</div></div>
+    <div class="newdish" data-search="tomato broth 番茄西红柿锅底"><div class="newtop"><div><b>Tomato</b><div class="ipa">/təˈmeɪtoʊ/</div><div class="zh">番茄锅底</div></div></div><div class="keyline">fresh tomato, rich tomato flavor｜鲜番茄浓汤</div></div>
+    <div class="newdish" data-search="mushroom broth 菌汤锅底"><div class="newtop"><div><b>Mushroom</b><div class="ipa">/ˈmʌʃˌrum/</div><div class="zh">菌汤锅底</div></div></div><div class="keyline">a variety of mushrooms｜多种菌菇</div></div>
+    <div class="newdish" data-search="miso broth 味噌锅底"><div class="newtop"><div><b>Miso</b><div class="ipa">/ˈmisoʊ/</div><div class="zh">味噌锅底</div></div></div><div class="keyline">vegetable stock and miso｜蔬菜高汤与味噌</div></div>
+    <div class="newdish" data-search="spicy miso broth 辣味噌锅底"><div class="newtop"><div><b>Spicy Miso</b><div class="ipa">/ˈspaɪsi ˈmisoʊ/</div><div class="zh">辣味噌锅底</div></div></div><div class="keyline">vegetable stock, miso and chili｜蔬菜高汤、味噌与辣椒</div></div>
+    <div class="newdish" data-search="clean clear beef bone soup 清汤牛骨锅底"><div class="newtop"><div><b>Clean &amp; Clear</b><div class="ipa">/klin ænd klɪr/</div><div class="zh">清汤牛骨锅底</div></div></div><div class="keyline">original beef bone soup｜原味牛骨汤</div></div>
+
+    <h3 class="group-title">Meats｜肉类</h3>
+    <div class="newdish" data-search="beef chunk eye snowflake beef 雪花牛"><div class="newtop"><div><b>Beef Chunk Eye</b><div class="ipa">/bif tʃʌŋk aɪ/</div><div class="zh">雪花牛</div></div></div></div>
+    <div class="newdish" data-search="beef eye of round premium fatty beef 精品肥牛"><div class="newtop"><div><b>Beef Eye of Round</b><div class="ipa">/bif aɪ əv raʊnd/</div><div class="zh">精品肥牛</div></div></div></div>
+    <div class="newdish" data-search="beef short plate 五花牛肉"><div class="newtop"><div><b>Beef Short Plate</b><div class="ipa">/bif ʃɔrt pleɪt/</div><div class="zh">五花牛肉</div></div></div></div>
+    <div class="newdish" data-search="lamb shoulder 羊肩肉"><div class="newtop"><div><b>Lamb Shoulder</b><div class="ipa">/læm ˈʃoʊldɚ/</div><div class="zh">羊肩肉</div></div></div></div>
+
+    <h3 class="group-title">Included Desserts｜每人一份甜品</h3>
+    <div class="newdish" data-search="ice cream vanilla strawberry mint chocolate chip 冰淇淋 香草 草莓 薄荷巧克力"><div class="newtop"><div><b>Ice Cream</b><div class="ipa">/aɪs krim/</div><div class="zh">冰淇淋：香草 / 草莓 / 薄荷巧克力碎</div></div><div class="price">One per person</div></div></div>
+    <div class="newdish" data-search="cake tiramisu mango mousse 蛋糕 提拉米苏 芒果慕斯"><div class="newtop"><div><b>Cake</b><div class="ipa">/keɪk/</div><div class="zh">蛋糕：提拉米苏 / 芒果慕斯</div></div><div class="price">One per person</div></div></div>
+
+    <h3 class="group-title">Alcoholic Drinks｜酒精饮品</h3>
+    <div class="newdish" data-search="napa valley red wine 纳帕谷红酒"><div class="newtop"><div><b>Napa Valley Red Wine</b><div class="ipa">/ˈnæpə ˈvæli rɛd waɪn/</div><div class="zh">纳帕谷红葡萄酒</div></div><div class="price">$35/bottle</div></div></div>
+    <div class="newdish" data-search="stella rosa 斯特拉罗莎"><div class="newtop"><div><b>Stella Rosa</b><div class="ipa">/ˈstɛlə ˈroʊzə/</div><div class="zh">Stella Rosa 葡萄酒</div></div><div class="price">$20/bottle</div></div></div>
+    <div class="newdish" data-search="sapporo newcastle beer 札幌 纽卡斯尔 啤酒"><div class="newtop"><div><b>Sapporo / Newcastle</b><div class="ipa">/səˈpɔroʊ / ˈnuˌkæsəl/</div><div class="zh">札幌 / 纽卡斯尔啤酒</div></div><div class="price">$4.50/mug · $14.50/pitcher</div></div></div>
+    <div class="newdish" data-search="bottled beer 瓶装啤酒"><div class="newtop"><div><b>Bottled Beer</b><div class="ipa">/ˈbɑtəld bɪr/</div><div class="zh">瓶装啤酒</div></div><div class="price">$3.50/bottle</div></div></div>
+    <div class="newdish" data-search="japanese sake 日本清酒"><div class="newtop"><div><b>Japanese Sake</b><div class="ipa">/ˌdʒæpəˈniz ˈsɑkeɪ/</div><div class="zh">日本清酒</div></div><div class="price">$12.99/bottle</div></div></div>
+    <div class="newdish" data-search="korean sake soju fresh strawberry grapefruit green grape 韩国烧酒 草莓 葡萄柚 青葡萄"><div class="newtop"><div><b>Korean Sake</b><div class="ipa">/kəˈriən ˈsɑkeɪ/</div><div class="zh">韩国烧酒：原味 / 草莓 / 葡萄柚 / 青葡萄</div></div><div class="price">$12.99/bottle</div></div><div class="keyline">照片印作 “Karean Sake”，此处按常见拼写整理。</div></div>
+
+    <h3 class="group-title">Soft Drinks｜软饮</h3>
+    <div class="newdish" data-search="soda coke diet coke sprite 7up 汽水 可乐 雪碧 七喜"><div class="newtop"><div><b>Soda</b><div class="ipa">/ˈsoʊdə/</div><div class="zh">汽水：Coke / Diet Coke / Sprite / 7UP</div></div><div class="price">$2.50</div></div><div class="keyline">照片印作 “Spirit”，按 Sprite 整理。</div></div>
+    <div class="newdish" data-search="perrier 巴黎水"><div class="newtop"><div><b>Perrier</b><div class="ipa">/ˌpɛriˈeɪ/</div><div class="zh">巴黎水</div></div><div class="price">$3</div></div></div>
+    <div class="newdish" data-search="flavored mineral sparkling water wild strawberry blood orange dark cherry 风味气泡水 草莓 血橙 黑樱桃"><div class="newtop"><div><b>Flavored Mineral Sparkling Water</b><div class="ipa">/ˈfleɪvɚd ˈmɪnərəl ˈspɑrklɪŋ ˈwɔtɚ/</div><div class="zh">风味矿泉气泡水：野草莓 / 血橙 / 黑樱桃</div></div><div class="price">$3.50</div></div></div>
+    <div class="newdish" data-search="plum juice 梅子汁"><div class="newtop"><div><b>Plum Juice</b><div class="ipa">/plʌm dʒus/</div><div class="zh">梅子汁</div></div><div class="price">$10/bottle</div></div></div>
+    <div class="newdish" data-search="artic ocean arctic ocean 北冰洋"><div class="newtop"><div><b>ArticOcean</b><div class="ipa">/ˈɑrktɪk ˈoʊʃən/</div><div class="zh">北冰洋汽水</div></div><div class="price">$3</div></div></div>
+    <div class="newdish" data-search="tea hot iced 热茶 冰茶"><div class="newtop"><div><b>Tea (Hot / Iced)</b><div class="ipa">/ti hɑt / aɪst/</div><div class="zh">热茶 / 冰茶</div></div><div class="price">$2</div></div></div>
+    <div class="newdish" data-search="beijing yogurt 北京酸奶"><div class="newtop"><div><b>Beijing Yogurt</b><div class="ipa">/ˌbeɪˈdʒɪŋ ˈjoʊɡɚt/</div><div class="zh">北京酸奶</div></div><div class="price">$3.50</div></div></div>
+
+    <h3 class="group-title">Current Drinks &amp; Refreshments｜现行饮品与果饮</h3>
+    <div class="newdish" data-search="current drinks flavored sparkling water joyba bubble tea canned milk tea hot cold tea canned soda iced coffee thai tea"><table><thead><tr><th>Drink 饮品</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Flavored Sparkling Water</td><td>/ˈfleɪvɚd ˈspɑrklɪŋ ˈwɔtɚ/</td><td>风味气泡水</td><td>$4</td></tr>
+      <tr><td>JOYBA Bubble Tea</td><td>/ˈdʒɔɪbə ˈbʌbəl ti/</td><td>JOYBA 珍珠奶茶</td><td>$3.75</td></tr>
+      <tr><td>Canned Milk Tea</td><td>/kænd mɪlk ti/</td><td>罐装奶茶</td><td>$3.75</td></tr>
+      <tr><td>Hot / Cold Tea</td><td>/hɑt / koʊld ti/</td><td>热茶 / 冷茶</td><td>$2</td></tr>
+      <tr><td>Canned Soda</td><td>/kænd ˈsoʊdə/</td><td>罐装汽水</td><td>$3.50</td></tr>
+      <tr><td>Iced Coffee</td><td>/aɪst ˈkɔfi/</td><td>冰咖啡</td><td>$5</td></tr>
+      <tr><td>Thai Tea</td><td>/taɪ ti/</td><td>泰式奶茶</td><td>$5</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="refreshments passionfruit chia seeds fizz strawberry jug cup 百香果 奇亚籽 草莓 气泡饮"><table><thead><tr><th>Refreshment 果饮</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Passionfruit with Chia Seeds Jug</td><td>/ˈpæʃənˌfrut wɪð ˈtʃiə sidz dʒʌɡ/</td><td>百香果奇亚籽壶装饮品</td><td>$12.99</td></tr>
+      <tr><td>Passionfruit Fizz Jug</td><td>/ˈpæʃənˌfrut fɪz dʒʌɡ/</td><td>百香果气泡饮（壶）</td><td>$11.99</td></tr>
+      <tr><td>Strawberry Fizz Jug</td><td>/ˈstrɔˌbɛri fɪz dʒʌɡ/</td><td>草莓气泡饮（壶）</td><td>$11.99</td></tr>
+      <tr><td>Passionfruit with Chia Seeds Cup</td><td>/ˈpæʃənˌfrut wɪð ˈtʃiə sidz kʌp/</td><td>百香果奇亚籽饮（杯）</td><td>$5.95</td></tr>
+      <tr><td>Passionfruit Fizz Cup</td><td>/ˈpæʃənˌfrut fɪz kʌp/</td><td>百香果气泡饮（杯）</td><td>$5</td></tr>
+      <tr><td>Strawberry Fizz Cup</td><td>/ˈstrɔˌbɛri fɪz kʌp/</td><td>草莓气泡饮（杯）</td><td>$5</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="matcha latte strawberry espresso 抹茶拿铁 草莓 浓缩咖啡"><table><thead><tr><th>Matcha 抹茶</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Matcha Latte</td><td>/ˈmætʃə ˈlɑteɪ/</td><td>抹茶拿铁</td><td>$5</td></tr>
+      <tr><td>Matcha Strawberry Latte</td><td>/ˈmætʃə ˈstrɔˌbɛri ˈlɑteɪ/</td><td>抹茶草莓拿铁</td><td>$5.75</td></tr>
+      <tr><td>Matcha Espresso</td><td>/ˈmætʃə eˈsprɛsoʊ/</td><td>抹茶浓缩咖啡</td><td>$5.75</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="shaved ice original taro chia red bean lychee durian avocado 刨冰 芋头 奇亚籽 红豆 荔枝 榴莲 牛油果"><table><thead><tr><th>Shaved Ice 刨冰</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Original (Taro, Chia, Red Bean, Lychee)</td><td>/əˈrɪdʒənəl/</td><td>原味（芋头、奇亚籽、红豆、荔枝）</td><td>$7</td></tr>
+      <tr><td>Taro / Durian Smash</td><td>/ˈtɛroʊ / ˈdʊriən smæʃ/</td><td>芋头 / 榴莲冰沙</td><td>$8</td></tr>
+      <tr><td>Avocado / Durian Smash</td><td>/ˌævəˈkɑdoʊ / ˈdʊriən smæʃ/</td><td>牛油果 / 榴莲冰沙</td><td>$8</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="hard seltzer soju alcohol 气泡酒 韩国烧酒"><div class="newtop"><div><b>Hard Seltzer / Soju</b><div class="ipa">/hɑrd ˈsɛltsɚ / ˈsoʊdʒu/</div><div class="zh">气泡酒 / 韩国烧酒</div></div><div class="price">$5 / $15.99</div></div><div class="keyline">啤酒价格在照片边缘被遮挡，因此未臆测。</div></div>
+  </div>
+</section>
+
+<section class="section newmenu" id="coffee-n-more-review">
+  <h2>Coffee N More｜咖啡、茶、奶茶与鲷鱼烧</h2>
+  <div class="review-note">照片中有 Regular / Large 两档时仅保留 Regular 价格。画面边缘被遮挡、无法同时确认名称与价格的项目未收录。</div>
+  <div class="newgrid">
+    <h3 class="group-title">Hot Espresso｜热咖啡</h3>
+    <div class="newdish" data-search="hot espresso americano cappuccino cafe latte mocha caramel macchiato chocolate vanilla dalgona 热咖啡 美式 卡布奇诺 拿铁 摩卡 焦糖玛奇朵 巧克力 香草 达尔戈纳"><table><thead><tr><th>Drink 饮品</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Americano</td><td>/əˌmɛrəˈkɑnoʊ/</td><td>美式咖啡</td><td>$3.75</td></tr>
+      <tr><td>Cappuccino</td><td>/ˌkæpəˈtʃinoʊ/</td><td>卡布奇诺</td><td>$4.50</td></tr>
+      <tr><td>Cafe Latte</td><td>/kæˈfeɪ ˈlɑteɪ/</td><td>咖啡拿铁</td><td>$4.50</td></tr>
+      <tr><td>Cafe Mocha</td><td>/kæˈfeɪ ˈmoʊkə/</td><td>摩卡咖啡</td><td>$5</td></tr>
+      <tr><td>Caramel Macchiato</td><td>/ˈkærəməl ˌmɑkiˈɑtoʊ/</td><td>焦糖玛奇朵</td><td>$5</td></tr>
+      <tr><td>Chocolate Latte</td><td>/ˈtʃɔklət ˈlɑteɪ/</td><td>巧克力拿铁</td><td>$4</td></tr>
+      <tr><td>Vanilla Latte</td><td>/vəˈnɪlə ˈlɑteɪ/</td><td>香草拿铁</td><td>$5</td></tr>
+      <tr><td>Dalgona Coffee</td><td>/dælˈɡoʊnə ˈkɔfi/</td><td>达尔戈纳咖啡</td><td>$5</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Coffee &amp; Matcha Drinks｜咖啡与抹茶饮</h3>
+    <div class="newdish" data-search="coffee drinks americano dalgona caramel macchiato cappuccino latte mocha vanilla matcha green tea 咖啡 抹茶"><table><thead><tr><th>Drink 饮品</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Americano</td><td>/əˌmɛrəˈkɑnoʊ/</td><td>美式咖啡</td><td>$4.50</td></tr>
+      <tr><td>Dalgona Coffee</td><td>/dælˈɡoʊnə ˈkɔfi/</td><td>达尔戈纳咖啡</td><td>$5.50</td></tr>
+      <tr><td>Caramel Macchiato</td><td>/ˈkærəməl ˌmɑkiˈɑtoʊ/</td><td>焦糖玛奇朵</td><td>$5.50</td></tr>
+      <tr><td>Cappuccino</td><td>/ˌkæpəˈtʃinoʊ/</td><td>卡布奇诺</td><td>$5</td></tr>
+      <tr><td>Cafe Latte</td><td>/kæˈfeɪ ˈlɑteɪ/</td><td>咖啡拿铁</td><td>$5</td></tr>
+      <tr><td>Cafe Mocha</td><td>/kæˈfeɪ ˈmoʊkə/</td><td>摩卡咖啡</td><td>$5</td></tr>
+      <tr><td>Vanilla Latte</td><td>/vəˈnɪlə ˈlɑteɪ/</td><td>香草拿铁</td><td>$5.50</td></tr>
+      <tr><td>Matcha Green Tea</td><td>/ˈmætʃə ɡrin ti/</td><td>抹茶绿茶</td><td>$5.50</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Hot / Iced Tea｜热茶 / 冰茶</h3>
+    <div class="newdish" data-search="hot iced tea ginger passion fruit jujube ssangwha 姜茶 百香果茶 红枣茶 双和茶"><table><thead><tr><th>Tea 茶饮</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Hot Ginger Tea</td><td>/hɑt ˈdʒɪndʒɚ ti/</td><td>热姜茶</td><td>$6</td></tr>
+      <tr><td>Hot Passion Fruit Tea</td><td>/hɑt ˈpæʃən frut ti/</td><td>热百香果茶</td><td>$5</td></tr>
+      <tr><td>Hot Jujube Tea</td><td>/hɑt ˈdʒuˌdʒub ti/</td><td>热红枣茶</td><td>$6</td></tr>
+      <tr><td>Hot Ssangwha Tea</td><td>/hɑt sɑŋˈhwɑ ti/</td><td>热双和茶</td><td>$6.50</td></tr>
+      <tr><td>Iced Ginger Tea</td><td>/aɪst ˈdʒɪndʒɚ ti/</td><td>冰姜茶</td><td>$7</td></tr>
+      <tr><td>Iced Passion Fruit Tea</td><td>/aɪst ˈpæʃən frut ti/</td><td>冰百香果茶</td><td>$5.50</td></tr>
+      <tr><td>Iced Jujube Tea</td><td>/aɪst ˈdʒuˌdʒub ti/</td><td>冰红枣茶</td><td>$6</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Einspänner｜奶油咖啡</h3>
+    <div class="newdish" data-search="einspanner americano latte matcha 奶油咖啡 美式 拿铁 抹茶"><table><thead><tr><th>Einspänner 奶油饮品</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Americano Einspänner</td><td>/əˌmɛrəˈkɑnoʊ ˈaɪnˌʃpɛnɚ/</td><td>美式奶油咖啡</td><td>$6</td></tr>
+      <tr><td>Latte Einspänner</td><td>/ˈlɑteɪ ˈaɪnˌʃpɛnɚ/</td><td>拿铁奶油咖啡</td><td>$6.50</td></tr>
+      <tr><td>Matcha Einspänner</td><td>/ˈmætʃə ˈaɪnˌʃpɛnɚ/</td><td>抹茶奶油饮</td><td>$6.50</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Boba Milk Tea｜珍珠奶茶（每款 $6）</h3>
+    <div class="newdish" data-search="boba milk tea brown sugar dalgona thai hong kong hokkaido classic taro mango matcha 珍珠奶茶 黑糖 达尔戈纳 泰式 港式 北海道 原味 芋头 芒果 抹茶"><table><thead><tr><th>Milk Tea 奶茶</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Brown Sugar Milk Tea</td><td>/braʊn ˈʃʊɡɚ mɪlk ti/</td><td>黑糖珍珠奶茶</td><td>$6</td></tr>
+      <tr><td>Dalgona Milk Tea</td><td>/dælˈɡoʊnə mɪlk ti/</td><td>达尔戈纳奶茶</td><td>$6</td></tr>
+      <tr><td>Thai Milk Tea</td><td>/taɪ mɪlk ti/</td><td>泰式奶茶</td><td>$6</td></tr>
+      <tr><td>Hong Kong Milk Tea</td><td>/ˌhɑŋ ˈkɑŋ mɪlk ti/</td><td>港式奶茶</td><td>$6</td></tr>
+      <tr><td>Hokkaido Milk Tea</td><td>/hɑˈkaɪdoʊ mɪlk ti/</td><td>北海道奶茶</td><td>$6</td></tr>
+      <tr><td>Classic Milk Tea</td><td>/ˈklæsɪk mɪlk ti/</td><td>经典奶茶</td><td>$6</td></tr>
+      <tr><td>Taro Milk Tea</td><td>/ˈtɛroʊ mɪlk ti/</td><td>芋头奶茶</td><td>$6</td></tr>
+      <tr><td>Mango Milk Tea</td><td>/ˈmæŋɡoʊ mɪlk ti/</td><td>芒果奶茶</td><td>$6</td></tr>
+      <tr><td>Matcha Milk Tea</td><td>/ˈmætʃə mɪlk ti/</td><td>抹茶奶茶</td><td>$6</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Smoothie / Slushy｜奶昔 / 冰沙（每款 $6）</h3>
+    <div class="newdish" data-search="smoothie slushy coffee mango taro matcha strawberry lychee multi grain 奶昔 冰沙 咖啡 芒果 芋头 抹茶 草莓 荔枝 杂粮"><table><thead><tr><th>Flavor 口味</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Coffee</td><td>/ˈkɔfi/</td><td>咖啡</td><td>$6</td></tr><tr><td>Mango</td><td>/ˈmæŋɡoʊ/</td><td>芒果</td><td>$6</td></tr><tr><td>Taro</td><td>/ˈtɛroʊ/</td><td>芋头</td><td>$6</td></tr><tr><td>Matcha</td><td>/ˈmætʃə/</td><td>抹茶</td><td>$6</td></tr><tr><td>Strawberry</td><td>/ˈstrɔˌbɛri/</td><td>草莓</td><td>$6</td></tr><tr><td>Lychee</td><td>/ˈlitʃi/</td><td>荔枝</td><td>$6</td></tr><tr><td>Multi Grain</td><td>/ˈmʌlti ɡreɪn/</td><td>杂粮</td><td>$6</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Fresh Ade / Juice｜鲜果气泡饮 / 果汁</h3>
+    <div class="newdish" data-search="fresh ade grapefruit ginger passion fruit 西柚 姜 百香果 气泡饮"><table><thead><tr><th>Fresh Ade 鲜果气泡饮</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Grapefruit Ade</td><td>/ˈɡreɪpˌfrut eɪd/</td><td>西柚气泡饮</td><td>$6.50</td></tr><tr><td>Ginger Ade</td><td>/ˈdʒɪndʒɚ eɪd/</td><td>姜味气泡饮</td><td>$7</td></tr><tr><td>Passion Fruit Ade</td><td>/ˈpæʃən frut eɪd/</td><td>百香果气泡饮</td><td>$6.50</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="fresh juice kale carrot abc apple beetroot watermelon 羽衣甘蓝 胡萝卜 苹果 甜菜根 西瓜"><table><thead><tr><th>Fresh Juice 鲜榨果汁</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Kale Juice</td><td>/keɪl dʒus/</td><td>羽衣甘蓝汁</td><td>$6.50</td></tr><tr><td>Carrot Juice</td><td>/ˈkærət dʒus/</td><td>胡萝卜汁</td><td>$6</td></tr><tr><td>ABC Juice</td><td>/ˌeɪ bi ˈsi dʒus/</td><td>ABC 果汁（苹果、甜菜根、胡萝卜）</td><td>$6</td></tr><tr><td>Apple Juice</td><td>/ˈæpəl dʒus/</td><td>苹果汁</td><td>$6</td></tr><tr><td>Watermelon Juice</td><td>/ˈwɔtɚˌmɛlən dʒus/</td><td>西瓜汁</td><td>$5</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Frappé Coffee / Add-ons｜冰沙咖啡 / 加料</h3>
+    <div class="newdish" data-search="frappe coffee mocha caramel vanilla 摩卡 焦糖 香草 冰沙咖啡"><table><thead><tr><th>Frappé 冰沙咖啡</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Mocha Frappé</td><td>/ˈmoʊkə fræˈpeɪ/</td><td>摩卡冰沙咖啡</td><td>$5.50</td></tr><tr><td>Caramel Frappé</td><td>/ˈkærəməl fræˈpeɪ/</td><td>焦糖冰沙咖啡</td><td>$5.50</td></tr><tr><td>Vanilla Frappé</td><td>/vəˈnɪlə fræˈpeɪ/</td><td>香草冰沙咖啡</td><td>$5.50</td></tr>
+    </tbody></table></div>
+    <div class="newdish" data-search="add ons espresso shot oat milk almond extra boba 加料 浓缩咖啡 燕麦奶 杏仁奶 珍珠"><table><thead><tr><th>Add-on 加料</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Espresso Shot</td><td>/eˈsprɛsoʊ ʃɑt/</td><td>加浓缩咖啡</td><td>+$1</td></tr><tr><td>Oat Milk</td><td>/oʊt mɪlk/</td><td>燕麦奶</td><td>+$1</td></tr><tr><td>Almond Milk</td><td>/ˈɑmənd mɪlk/</td><td>杏仁奶</td><td>+$1</td></tr><tr><td>Extra Boba</td><td>/ˈɛkstrə ˈboʊbə/</td><td>加珍珠</td><td>+$0.75</td></tr>
+    </tbody></table></div>
+
+    <h3 class="group-title">Waffle Pastry (Taiyaki)｜鲷鱼烧</h3>
+    <div class="newdish" data-search="taiyaki filling red bean custard cream pumpkin cream cheese nutella 鲷鱼烧 红豆 卡仕达 南瓜 奶油奶酪 榛果巧克力"><table><thead><tr><th>Filling 内馅</th><th>IPA</th><th>中文</th><th>Price</th></tr></thead><tbody>
+      <tr><td>Red Bean</td><td>/rɛd bin/</td><td>红豆</td><td>$2.50</td></tr><tr><td>Custard Cream</td><td>/ˈkʌstɚd krim/</td><td>卡仕达奶油</td><td>$2.50</td></tr><tr><td>Pumpkin</td><td>/ˈpʌmpkɪn/</td><td>南瓜</td><td>$2.50</td></tr><tr><td>Cream Cheese</td><td>/krim tʃiz/</td><td>奶油奶酪</td><td>$2.50</td></tr><tr><td>Nutella</td><td>/nuˈtɛlə/</td><td>榛果巧克力酱</td><td>$2.50</td></tr>
+    </tbody></table><div class="keyline">组合价：2 个 $5 · 4 个 $10 · 5 个 $12。制作时间约 10 分钟以内。</div></div>
+  </div>
+</section>
+
+<section class="section" id="pcy-hot-pot-review">
+  <h2>PCY AYCE Hot Pot｜劈柴院自助火锅</h2>
+  <p class="small">图片菜单信息：免费自选汤底；用餐限时 90 分钟；周末和节假日按晚餐时段。以下价格仅作图片参考。</p>
+
+  <h3 class="group-title">Broths｜锅底</h3>
+  <div class="newdish" data-search="pcy ayce hot pot broth 劈柴院 火锅 锅底 鸳鸯锅 原味骨汤 酸菜汤 番茄汤 菌菇汤 辣锅"><table><thead><tr><th>English</th><th>IPA</th><th>中文</th></tr></thead><tbody>
+    <tr><td>Pick Two Different Broths</td><td>/pɪk tu ˈdɪfrənt brɔθs/</td><td>劈柴院鸳鸯锅（任选两种锅底）</td></tr>
+    <tr><td>Original Broth</td><td>/əˈrɪdʒənəl brɔθ/</td><td>药膳原味骨汤</td></tr>
+    <tr><td>Hot &amp; Sour Soup</td><td>/hɑt ænd ˈsaʊɚ sup/</td><td>金汤酸菜汤</td></tr>
+    <tr><td>Tomato Broth</td><td>/təˈmeɪtoʊ brɔθ/</td><td>鲜浓番茄汤</td></tr>
+    <tr><td>Mushroom Broth</td><td>/ˈmʌʃrum brɔθ/</td><td>滋补菌菇汤</td></tr>
+    <tr><td>Spicy Broth (Mild / Medium / Hot)</td><td>/ˈspaɪsi brɔθ/</td><td>飘香辣锅（小辣 / 中辣 / 大辣）</td></tr>
+  </tbody></table></div>
+
+  <h3 class="group-title">Combo A AYCE｜精品套餐任点任吃</h3>
+  <div class="newdish" data-search="combo a sliced beef short plate australia lamb shoulder chicken tender fillet sliced pork belly marinated garlic beef 精品套餐 肥牛卷 澳洲羊肩肉 滑嫩鸡柳卷 五花肉 蒜香牛"><table><thead><tr><th>English</th><th>IPA</th><th>中文</th></tr></thead><tbody>
+    <tr><td>Sliced Beef Short Plate</td><td>/slaɪst bif ʃɔrt pleɪt/</td><td>劈柴院肥牛卷</td></tr>
+    <tr><td>Australian Lamb Shoulder</td><td>/ɔˈstreɪliən læm ˈʃoʊldɚ/</td><td>澳洲羊肩肉</td></tr>
+    <tr><td>Chicken Tender Fillet</td><td>/ˈtʃɪkɪn ˈtɛndɚ fɪˈleɪ/</td><td>滑嫩鸡柳卷</td></tr>
+    <tr><td>Sliced Pork Belly</td><td>/slaɪst pɔrk ˈbɛli/</td><td>五花肉片</td></tr>
+    <tr><td>Marinated Garlic Beef</td><td>/ˈmɛrəˌneɪtɪd ˈɡɑrlɪk bif/</td><td>特制蒜香牛</td></tr>
+  </tbody></table><div class="keyline">图片参考：午餐 $19.99 · 晚餐 $26.99</div></div>
+
+  <h3 class="group-title">Combo B AYCE｜极品套餐任点任吃</h3>
+  <div class="newdish" data-search="combo b usda choice ribeye new zealand lamb sliced young lamb usda premium angus ribeye 极品套餐 牛眼肉 纽西兰羊腿肉 羔羊 安格斯"><table><thead><tr><th>English</th><th>IPA</th><th>中文</th></tr></thead><tbody>
+    <tr><td>USDA Choice Ribeye</td><td>/ˌju ɛs di ˈeɪ tʃɔɪs ˈraɪbˌaɪ/</td><td>精选 A 级牛眼肉</td></tr>
+    <tr><td>New Zealand Lamb</td><td>/nu ˈzilənd læm/</td><td>纽西兰 A 级羊腿肉</td></tr>
+    <tr><td>Sliced Young Lamb</td><td>/slaɪst jʌŋ læm/</td><td>极品羔羊</td></tr>
+    <tr><td>USDA Premium Angus Ribeye</td><td>/ˌju ɛs di ˈeɪ ˈprimiəm ˈæŋɡəs ˈraɪbˌaɪ/</td><td>安格斯牛眼肉</td></tr>
+  </tbody></table><div class="keyline">图片参考：午餐 $25.99 · 晚餐 $31.99</div></div>
+
+  <h3 class="group-title">Combo C AYCE｜豪华套餐任点任吃</h3>
+  <div class="newdish" data-search="combo c premium american kobe beef wagyu grassland lamb beef tongue 豪华套餐 雪花和牛 草原绵羊 牛舌"><table><thead><tr><th>English</th><th>IPA</th><th>中文</th></tr></thead><tbody>
+    <tr><td>Premium American Kobe Beef Wagyu</td><td>/ˈprimiəm əˈmɛrɪkən ˈkoʊbi bif ˈwɑɡju/</td><td>雪花和牛</td></tr>
+    <tr><td>New Zealand Grassland Lamb</td><td>/nu ˈzilənd ˈɡræsˌlænd læm/</td><td>纽西兰草原绵羊</td></tr>
+    <tr><td>Grade A Beef Tongue</td><td>/ɡreɪd eɪ bif tʌŋ/</td><td>A 级牛舌</td></tr>
+  </tbody></table><div class="keyline">图片参考：午餐 $34.99 · 晚餐 $39.99</div></div>
+</section>
+</div>
+<button class="drawer-toggle" id="drawerToggle" type="button" aria-controls="menuDrawer" aria-expanded="false">☰ 菜单目录</button>
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="side-drawer" id="menuDrawer" aria-hidden="true">
+  <div class="drawer-head"><strong>菜单目录</strong><button class="drawer-close" id="drawerClose" type="button" aria-label="关闭目录">×</button></div>
+  <div class="drawer-group">PRADERA</div>
+  <a href="#s0">开胃菜</a><a href="#s1">传统菜</a><a href="#s2">早午餐 / 美式经典</a><a href="#s3">塔可 / 沙拉 / 汉堡</a><a href="#s4">松饼 / 华夫 / 法式吐司</a><a href="#s5">欧姆蛋 / 铁锅早餐</a><a href="#s6">无酒精饮品</a><a href="#s7">含酒精饮品</a>
+  <div class="drawer-group">粤味坊</div>
+  <a href="#new1">肉类</a><a href="#new2">煲仔饭</a><a href="#new3">海鲜</a><a href="#new4">蔬菜</a><a href="#new5">粉 / 面</a><a href="#new6">粥 / 米粉 / 肠粉</a><a href="#new7">蒸饭 / 炒饭 / 小食</a><a href="#new8">特价午餐</a>
+  <div class="drawer-group">其他餐厅</div>
+  <a href="#new9">Malibu Seafood · 烤海鲜</a><a href="#new10">Malibu Seafood · 三明治 / 炸物</a><a href="#new11">Malibu Seafood · 汤 / 沙拉</a><a href="#ramen-review">日本拉面</a><a href="#sprouts-sandwich-review">Sprouts 三明治</a><a href="#sprouts-smoothie-review">Sprouts 奶昔</a><a href="#pho-review">Phở Lovers 越南河粉</a><a href="#chuan-pot-review">Chuan Pot 川火锅</a><a href="#coffee-n-more-review">Coffee N More</a><a href="#pcy-hot-pot-review">劈柴院自助火锅</a>
+</aside>
 <script>
 (function(){
  const input=document.querySelector('input[type="search"], input');
- if(!input) return;
- input.addEventListener('input', function(){
+ if(input) input.addEventListener('input', function(){
    const q=this.value.trim().toLowerCase();
-   document.querySelectorAll('.newdish').forEach(x=>x.style.display=(!q||x.dataset.search.includes(q))?'':'none');
+   document.querySelectorAll('.newdish').forEach(x=>{const hay=((x.dataset.search||'')+' '+x.innerText).toLowerCase();x.style.display=(!q||hay.includes(q))?'':'none'});
  });
+ const drawer=document.getElementById('menuDrawer'), toggle=document.getElementById('drawerToggle'), close=document.getElementById('drawerClose'), backdrop=document.getElementById('drawerBackdrop');
+ function setDrawer(open){drawer.classList.toggle('open',open);backdrop.classList.toggle('open',open);document.body.classList.toggle('drawer-open',open);drawer.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));}
+ toggle.addEventListener('click',()=>setDrawer(true));close.addEventListener('click',()=>setDrawer(false));backdrop.addEventListener('click',()=>setDrawer(false));drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setDrawer(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')setDrawer(false)});
 })();
 </script>
 </body></html>
